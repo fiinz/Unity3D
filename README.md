@@ -1,6 +1,6 @@
 # Unity3D
 
-This repository contains all the resolutions for the exercices proposed during the classes.
+This repository contains all the solutions for the exercices proposed during the classes.
 
 Please note that all the solutions are intended to be the most comprehensive possible for begginers.
 
