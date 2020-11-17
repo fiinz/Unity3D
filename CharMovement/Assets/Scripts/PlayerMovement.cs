@@ -23,6 +23,7 @@ namespace CharMovement
         private bool isJumping;
         private float gravity;
         private bool isCrouched;
+        private Player_Stuck _playerStuck;
         
         // Start is called before the first frame update
         void Start()
@@ -40,14 +41,23 @@ namespace CharMovement
             _spriteRenderer = GetComponent<SpriteRenderer>();
             vx = vy = 0;
             myPlayerControllerJf = GetComponent<PlayerController>();
+            _playerStuck = GetComponent<Player_Stuck>();
         }
 
         
         // Update is called once per frame
         void Update()
         {
-            if (vx < 0) _spriteRenderer.flipX = false;
-            if (vx > 0) _spriteRenderer.flipX = true;
+            if(myPlayerControllerJf.axisX!=0)
+                transform.localScale=new Vector3(-myPlayerControllerJf.axisX,1,1);
+            
+            if (_playerStuck.isStuck)
+            {
+                vx = 0;
+                myAnimator.SetInteger("vx", (int)vx);
+                return;
+            }
+      
             
             if (myPlayerControllerJf.buttonA) { myAnimator.SetTrigger("kick"); }
             if (myPlayerControllerJf.buttonB) { myAnimator.SetTrigger("punch"); }
